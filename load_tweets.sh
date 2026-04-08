@@ -14,5 +14,6 @@ done
 echo 'load denormalized'
 for file in $files; do
     # use SQL's COPY command to load data into pg_denormalized (Port 10001)
-    unzip -p $file | sed 's/\\u0000//g' | psql postgresql://postgres:pass@localhost:10001/postgres -c "COPY tweets FROM STDIN csv quote e'\x01' delimiter e'\x02';"
+    # changed "tweets" to "tweets_jsonb (data)"
+    unzip -p $file | sed 's/\\u0000//g' | psql postgresql://postgres:pass@localhost:10001/postgres -c "COPY tweets_jsonb (data) FROM STDIN csv quote e'\x01' delimiter e'\x02';"
 done
