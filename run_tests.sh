@@ -10,8 +10,8 @@ for problem in sql/*; do
     result="results/$problem_id.out"
     expected="expected/$problem_id.out"
 
-    # UPDATED LINE BELOW: Point psql to your Docker container!
-    psql postgresql://postgres:pass@localhost:10002/postgres < $problem > $result
+    # REVERT THIS LINE BACK TO ORIGINAL:
+    psql < $problem > $result
 
     DIFF=$(diff -B $expected $result)
     if [ -z "$DIFF" ]; then
